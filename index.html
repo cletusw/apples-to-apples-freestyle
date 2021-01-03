@@ -43,7 +43,11 @@
       render(answersTemplate(), answersElement);
 
       db.ref('answers').on('value', function (snapshot) {
-        render(answersTemplate(snapshot.val()), answersElement);
+        let list = [];
+        snapshot.forEach((childSnapshot) => {
+          list.push(childSnapshot.val());
+        });
+        render(answersTemplate(list), answersElement);
       });
       
       const newAnswer = document.querySelector('#newAnswer');
