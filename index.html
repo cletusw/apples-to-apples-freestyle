@@ -54,6 +54,7 @@
       document.querySelector('#submitAnswer').addEventListener('click', () => {
         const value = newAnswer.value.trim();
         value && db.ref('answers').push(value);
+        newAnswer.value = '';
       });
       document.querySelector('#reset').addEventListener('click', () => {
         db.ref('answers').remove();
