@@ -55,6 +55,9 @@
         const value = newAnswer.value.trim();
         value && db.ref('answers').push(value);
       });
+      document.querySelector('#reset').addEventListener('click', () => {
+        db.ref('answers').remove();
+      });
     </script>
   </body>
 </html>
