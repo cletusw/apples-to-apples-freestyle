@@ -28,13 +28,13 @@
       const db = firebase.database();
       
       const answersElement = document.querySelector('#answers');
-      const answersTemplate = (answersList) => html`
+      const answersTemplate = (answersList = []) => html`
         ${answersList.map((answer) => html`
           <li>answer</li>
         `)}
       `;
 
-      render(answersTemplate([]), answersElement);
+      render(answersTemplate(), answersElement);
 
       db.ref('answers').on('value', function (snapshot) {
         render(answersTemplate(snapshot.val()), answersElement);
