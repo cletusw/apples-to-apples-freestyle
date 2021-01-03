@@ -7,8 +7,11 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
   </head>
   <body>
+    <button id="reset">Reset all</button>
     <ul id="answers">
     </ul>
+    <input type="text" id="newAnswer">
+    <button id="submitAnswer">Submit</button>
   
     <script type="module">
       import {html, render} from 'https://unpkg.com/lit-html?module';
@@ -41,6 +44,12 @@
 
       db.ref('answers').on('value', function (snapshot) {
         render(answersTemplate(snapshot.val()), answersElement);
+      });
+      
+      const newAnswer = document.querySelector('#newAnswer');
+      document.querySelector('#submitAnswer').addEventListener('click', () => {
+        const value = newAnswer.value.trim();
+        value && db.ref('answers').push(value);
       });
     </script>
   </body>
