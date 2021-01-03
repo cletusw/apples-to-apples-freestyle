@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+  </head>
+  <body>
+    <ul id="answers">
+    </ul>
+  
+    <script type="module">
+      import {html, render} from 'https://unpkg.com/lit-html?module';
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyDpKpT1GOWBhW3RpmP-1wlb7wIvwUpzd28",
+        authDomain: "apples-to-apples-freestyle.firebaseapp.com",
+        projectId: "apples-to-apples-freestyle",
+        storageBucket: "apples-to-apples-freestyle.appspot.com",
+        messagingSenderId: "131319768000",
+        appId: "1:131319768000:web:027e275e90569278b2de25"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      const db = firebase.database();
+      
+      const answersElement = document.querySelector('#answers');
+      const answersTemplate = (answersList) => html`
+        ${answersList.map((answer) => html`
+          <li>answer</li>
+        `)}
+      `;
+
+      render(answersTemplate([]), answersElement);
+
+      db.ref('answers').on('value', function (snapshot) {
+        render(answersTemplate(snapshot.val()), answersElement);
+      });
+    </script>
+  </body>
+</html>
