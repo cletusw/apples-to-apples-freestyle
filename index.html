@@ -28,11 +28,14 @@
       const db = firebase.database();
       
       const answersElement = document.querySelector('#answers');
-      const answersTemplate = (answersList = []) => html`
-        ${answersList.map((answer) => html`
-          <li>answer</li>
-        `)}
-      `;
+      const answersTemplate = (answersList) => {
+        answersList = answersList || [];
+        return html`
+          ${answersList.map((answer) => html`
+            <li>answer</li>
+          `)}
+        `;
+      };
 
       render(answersTemplate(), answersElement);
 
